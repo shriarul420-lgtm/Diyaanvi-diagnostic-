@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratory Test Report - Diyaanvi Diagnostics Centre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER STYLING */
+        .header {
+            position: relative;
+            padding: 20px;
+            background-color: white;
+            border-bottom: 3px solid #2d1b69;
+        }
+
+        .wave-design {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(135deg, #2d1b69 0%, #2d1b69 40%, #ffd700 40%, #ffd700 60%, white 60%, white 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 30%, 0 50%);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: #2d1b69;
+            border: 3px solid #ffd700;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #ffd700;
+        }
+
+        .org-name {
+            text-align: left;
+        }
+
+        .org-name h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2d1b69;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .org-name p {
+            font-size: 12px;
+            color: #e67e22;
+            font-weight: bold;
+            margin: 2px 0;
+            letter-spacing: 1px;
+        }
+
+        .org-name em {
+            font-size: 11px;
+            color: #2d1b69;
+            font-style: italic;
+            display: block;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        /* TITLE BAR */
+        .title-bar {
+            background-color: #2d1b69;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin: 10px 0;
+        }
+
+        /* MAIN CONTENT */
+        .content {
+            flex: 1;
+            padding: 40px;
+            min-height: 400px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: #2d1b69;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            border: none;
+            border-bottom: 1px solid #333;
+            padding: 8px 5px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            background-color: transparent;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            border: 1px solid #333;
+            padding: 10px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2d1b69;
+            background-color: #f9f9f9;
+        }
+
+        .divider {
+            border-top: 2px solid #2d1b69;
+            margin: 30px 0;
+        }
+
+        .test-results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .test-results-table th {
+            background-color: #2d1b69;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .test-results-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .test-results-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* FOOTER STYLING */
+        .footer {
+            background-color: #2d1b69;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-address {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .footer-contact span {
+            letter-spacing: 0.5px;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                min-height: auto;
+            }
+
+            .header, .content, .footer {
+                page-break-inside: avoid;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                border: 1px solid #333;
+                background-color: white;
+            }
+
+            .form-group input:focus,
+            .form-group textarea:focus {
+                background-color: white;
+                border: 1px solid #333;
+            }
+
+            @page {
+                margin: 0.5in;
+                size: A4;
+            }
+
+            /* Prevent page breaks in important sections */
+            .form-section {
+                page-break-inside: avoid;
+            }
+
+            .test-results-table {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .footer-contact {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .org-name h1 {
+                font-size: 20px;
+            }
+
+            .org-name p,
+            .org-name em {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="wave-design"></div>
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">🌳</div>
+                    <div class="org-name">
+                        <h1>DIYAANVI</h1>
+                        <p>DIAGNOSTICS CENTRE</p>
+                        <em>Creating Healthy Tomorrow</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TITLE BAR -->
+        <div class="title-bar">LABORATORY TEST REPORT</div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- Patient Information Section -->
+            <div class="form-section">
+                <h3 style="color: #2d1b69; margin-bottom: 15px; font-size: 14px; text-transform: uppercase;">Patient Information</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Patient Name</label>
+                        <input type="text" placeholder="Enter patient name">
+                    </div>
+                    <div class="form-group">
+                        <label>Age / DOB</label>
+                        <input type="text" placeholder="Age or Date of Birth">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <input type="text" placeholder="Male / Female / Other">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="text" placeholder="Enter contact number">
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" placeholder="Enter patient address">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Specimen ID</label>
+                        <input type="text" placeholder="Sample ID">
+                    </div>
+                    <div class="form-group">
+                        <label>Collection Date & Time</label>
+                        <input type="datetime-local">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Report Date</label>
+                        <input type="date">
+                    </div>
+                    <div class="form-group">
+                        <label>Referred By (Doctor Name)</label>
+                        <input type="text" placeholder="Doctor name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Test Results Section -->
+            <div class="form-section">
+                <h3 style="color: #2d1b69; margin-bottom: 15px; font-size: 14px; text-transform: uppercase;">Test Results</h3>
+                
+                <table class="test-results-table">
+                    <thead>
+                        <tr>
+                            <th>Test Name</th>
+                            <th>Result</th>
+                            <th>Unit</th>
+                            <th>Reference Range</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Test name"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Value"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Unit"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Range"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="N/H/L"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Test name"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Value"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Unit"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Range"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="N/H/L"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Test name"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Value"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Unit"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="Range"></td>
+                            <td><input type="text" style="border: none; width: 100%; padding: 0;" placeholder="N/H/L"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Clinical Notes Section -->
+            <div class="form-section">
+                <div class="form-group full">
+                    <label>Clinical Notes / Remarks</label>
+                    <textarea placeholder="Enter any clinical notes or remarks..."></textarea>
+                </div>
+            </div>
+
+            <!-- Signature Section -->
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-group" style="text-align: center;">
+                        <div style="height: 60px; border-top: 1px solid #333; margin-bottom: 5px;"></div>
+                        <label>Pathologist Signature</label>
+                    </div>
+                    <div class="form-group" style="text-align: center;">
+                        <div style="height: 60px; border-top: 1px solid #333; margin-bottom: 5px;"></div>
+                        <label>Authorized Signatory</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-address">
+                #9, Akul Arcade, 1st Floor, Above Pizza Hut, Chikkallasandra, Uttarahalli, Bengaluru - 560 061
+            </div>
+            <div class="footer-contact">
+                <span>Mob : 8904989288</span>
+                <span>Mail id : Diyaavnidiagnostic1@gmail.com</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Print functionality
+        function printReport() {
+            window.print();
+        }
+
+        // Add keyboard shortcut for printing (Ctrl+P)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                printReport();
+            }
+        });
+    </script>
+</body>
+</html>
